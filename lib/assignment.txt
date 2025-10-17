@@ -1,0 +1,85 @@
+Task Details:
+
+All Pages will have the following:
+An AppBar with 3 icon buttons which will be present in login, pokemoncreation, and pokedex page. Navigate to PokemonCreation, Pokedex and logout. and the user's username.
+Create an app which will have these pages:
+Create Account Page
+Log in Page
+Pokemon Creation Page
+View PokeDex Summary Page
+WorkFlow:
+
+User creates an account by fillip up the fields(FullName,usernname, birthday, Email, Password, re-enter password). After filling up, there shall be a button which allows the user to log in the created account.
+
+user may login the account by accessing the login button in the registration page. user should enter his username and password to login.
+
+The create pokemon page will open and the user will be allowed to create a pokemon with following details: ( name, type, image Link) use web address to load the image. after creating the pokemon. display only the details of the recent added pokemon below. created pokemons are stored in a list.
+
+The user may view the pokedex, displays all the pokemon created in a list along with all the details. add a remove button for each pokemon. This should remove that pokemon from the list. 
+
+Rules:
+
+
+Be able to setup the routes, and navigations
+
+Registration( all fields are required and should have a minimum of 3 characters,)
+
+
+Registration for pokemon( all fields are required and should have a minimum of 4 characters). Display the latest added pokemon below the registration form.
+
+
+Make use of globals/arguments to make all pages work.
+
+
+Do not use ai generated pre-sets! you may use your past tasks to accomplish this.
+
+FOR LATE TAKERS:
+name of the pokemon should be unique, no duplicates allowed
+
+There could only be 2 copies of the same type of pokemon, eg. you cannot have more than 2 electric pokemon in your list.
+
+Contents of your pokedex should be arranged by name.
+
+//for edit global data sample
+
+SharedData.allUsers[i] = UserCredentials(
+        fullname: newFullname,
+        username: username,
+        birthday: SharedData.allUsers[i].birthday,
+        email: newEmail,
+        password: SharedData.allUsers[i].password,
+      );
+
+
+//
+
+ListView.builder(
+  itemCount: 100, // Number of items
+  itemBuilder: (context, index) {
+    return ListTile(
+      leading: Icon(Icons.person),
+      title: Text("User $index"),
+      subtitle: Text("user$index@email.com"),
+    );
+  },
+)
+
+//scrollview support
+
+@override
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(...),
+    body: SingleChildScrollView(
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("List of pokemons"),
+            createRowPokemon()
+          ],
+        ),
+      ),
+    ),
+  );
+}
