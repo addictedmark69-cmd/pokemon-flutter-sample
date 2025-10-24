@@ -1,0 +1,138 @@
+import 'package:flutter/material.dart';
+import 'modules/globals.dart';
+class MyProfilePage extends StatefulWidget{
+  const MyProfilePage({super.key});
+
+  @override
+  State<MyProfilePage> createState()=>MyProfilePageActivity();
+}
+
+class MyProfilePageActivity extends State<MyProfilePage>{
+
+//Declare Map => objects and hashmap
+Map<String,String> pokemonDetails={"pokeName":"Pikachu","pokeType":"Electric"};
+// pokemonDetails["pokeName"]
+Map<String,int> grades={"mark":100,"peter":50};
+Map<String,Widget> myWidgets={"headerText":Text("wew")};
+final inputController_email = TextEditingController();
+final inputController_fullname = TextEditingController();
+final inputController_age = TextEditingController();
+
+String EmailInfo="default";
+String NameInfo="default";
+String AgeInfo="default";
+List<Map>allInfo=[];
+
+
+String sampleData="Data smth";
+String getGlobal=SharedData.globalData;
+
+  updateEmail(){
+
+    setState(() {
+      
+       EmailInfo =  inputController_email.text;
+       NameInfo =  inputController_fullname.text;
+       AgeInfo =  inputController_age.text;
+
+       var agehold = int.parse(AgeInfo);
+       var personCon = "";
+
+       if(agehold < 18){
+        personCon = "Minor";
+       }
+
+       else{
+        personCon = "Adult";
+       }
+       Map<String,String> userProfile = {"fullname":NameInfo,"email":EmailInfo,"age":AgeInfo,"personcon":personCon};
+       allInfo.add(userProfile);  
+    });
+   
+  }
+
+    displayData(){
+
+  Navigator.pushNamed(context, '/display');
+
+    }
+
+    //update global
+
+    updateGlobal(){
+      setState(() {
+      EmailInfo =  inputController_email.text;
+      SharedData.globalData=EmailInfo;
+      getGlobal=EmailInfo;
+      });
+    }
+
+  @override
+  Widget build(BuildContext context) {
+   
+
+     
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text("My First App",style: TextStyle(
+          color: Colors.white60,
+          fontSize: 30,
+          fontWeight: FontWeight.bold
+        ),
+        ),
+        backgroundColor: Colors.blueAccent,
+        actions: [
+          IconButton(onPressed: (){}, icon: Icon(Icons.adb_rounded,color: Colors.white,)),
+          IconButton(onPressed: (){}, icon: Icon(Icons.login)),
+          IconButton(onPressed: (){}, icon: Icon(Icons.logout)),
+          
+        ],
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          spacing: 10,
+          children: [
+           Text("value: $getGlobal"),
+           TextField(
+              // keyboardType: TextInputType.number,
+              controller: inputController_email,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText:"Enter your email here!",
+                labelText: "Email",
+                suffix: IconButton(onPressed: (){inputController_email.clear();}, icon: Icon(Icons.clear)) 
+              ),
+           ),
+
+            MaterialButton(onPressed: (){updateGlobal();},
+            color: const Color.fromARGB(255, 18, 201, 201),
+            minWidth: double.infinity,
+            child: Text("Update global Data"),
+            ),
+            MaterialButton(onPressed: (){displayData();},
+            color: const Color.fromARGB(255, 18, 201, 201),
+            minWidth: double.infinity,
+            child: Text("Display Your Data"),
+           ),
+           Text("INF225_SIM8_Nieva_Mark_fgrh6sh4HnsPtyUfm225"),
+
+           for(int i=0;i<allInfo.length;i++)
+           Text("${allInfo[i]["fullname"]} - ${allInfo[i]["email"]} - ${allInfo[i]["age"]} ${allInfo[i]["personcon"]}")
+          ],
+        ),
+    ),
+    floatingActionButton: FloatingActionButton(onPressed: (){}),
+    bottomNavigationBar: BottomNavigationBar(items: [
+        BottomNavigationBarItem(label: "Home",icon: Icon(Icons.home)),
+        BottomNavigationBarItem(label: "Contact",icon: Icon(Icons.contact_phone)),
+        BottomNavigationBarItem(label: "Location",icon: Icon(Icons.location_city)),
+    ],
+      ),
+    );
+  }
+
+}
+
+

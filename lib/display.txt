@@ -1,0 +1,53 @@
+import 'package:flutter/material.dart';
+import 'modules/globals.dart';
+import 'models/users.dart';
+
+class ShowData extends StatelessWidget{
+
+  const ShowData({super.key});
+  
+
+
+@override
+
+  Widget build(BuildContext context) {
+
+String getGlobal=SharedData.globalData;
+//instances
+
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text("My First App",style: TextStyle(
+          color: Colors.white60,
+          fontSize: 30,
+          fontWeight: FontWeight.bold
+        ),
+        ),
+        backgroundColor: Colors.blueAccent,
+        actions: [
+          IconButton(onPressed: (){}, icon: Icon(Icons.adb_rounded,color: Colors.white,)),
+          IconButton(onPressed: (){}, icon: Icon(Icons.login)),
+          IconButton(onPressed: (){}, icon: Icon(Icons.logout)),   
+        ],
+      ),
+      body: Column(
+        children: [
+          Text(getGlobal),
+          Text("INF225_SIM8_Nieva_Mark_fgrh6sh4HnsPtyUfm225"),
+          // for(int i=0; i < tempData.length;i++)
+          // Text("${tempData[i]["fullname"]} - ${tempData[i]["email"]} - ${tempData[i]["age"]} ${tempData[i]["personcon"]}")
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(onPressed: (){}),
+      bottomNavigationBar: BottomNavigationBar(items: [
+        BottomNavigationBarItem(label: "Home",icon: Icon(Icons.home)),
+        BottomNavigationBarItem(label: "Contact",icon: Icon(Icons.contact_phone)),
+        BottomNavigationBarItem(label: "Location",icon: Icon(Icons.location_city)),
+    ],
+      ),
+    );
+  }
+
+}
+
